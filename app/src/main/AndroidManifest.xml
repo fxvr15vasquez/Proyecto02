@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".men"
-            android:label="@string/title_activity_men"
+            android:name=".InicioActivity"
+            android:label="@string/title_activity_inicio"
             android:theme="@style/NoActionBar"></activity>
         <activity android:name=".Registro" />
         <activity android:name=".IngresoTarea" />

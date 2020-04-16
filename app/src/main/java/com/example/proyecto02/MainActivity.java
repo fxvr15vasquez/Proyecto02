@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (user.equals("") && pass.equals("")){
                     Toast.makeText(this,"Campos vacios",Toast.LENGTH_SHORT).show();
                 }else if(id_usu !=0){
-                    //Intent inlogin = new Intent(MainActivity.this,Inicio.class);
-                    //inlogin.putExtra("id_usu",id_usu);
-                    //startActivity(inlogin);
+                    Intent inlogin = new Intent(MainActivity.this,InicioActivity.class);
+                    inlogin.putExtra("id_usu",id_usu);
+                    startActivity(inlogin);
                 }else{
                     Toast.makeText(this,"Usuario o contraseña incorrectas",Toast.LENGTH_SHORT).show();
                 }
