@@ -12,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Registro"></activity>
-        <activity android:name="com.example.proyecto02.IngresoTarea" />
-        <activity android:name="com.example.proyecto02.IngresoMateria" />
+        <activity
+            android:name=".men"
+            android:label="@string/title_activity_men"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".Registro" />
+        <activity android:name=".IngresoTarea" />
+        <activity android:name=".IngresoMateria" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
