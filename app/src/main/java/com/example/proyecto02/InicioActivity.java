@@ -1,9 +1,12 @@
 package com.example.proyecto02;
 
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
+import com.example.proyecto02.modeloDB.usuarioDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -16,9 +19,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+
 public class InicioActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    TextView textuser;
+    TextView txtelec;
+    usuarioDB usuDB;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +47,23 @@ public class InicioActivity extends AppCompatActivity {
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        usuDB = new usuarioDB();
+
+        textuser = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtusuarrio);
+        txtelec = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtcorreo);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null){
+            textuser.setText(extras.getString("user"));
+            txtelec.setText(extras.getString("correo"));
+        }
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -46,6 +72,8 @@ public class InicioActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

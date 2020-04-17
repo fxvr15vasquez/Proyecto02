@@ -14,4 +14,7 @@
 
     <string name="home_second">Home Second</string>
     <string name="title_activity_inicio">InicioActivity</string>
+    <string name="inicio">Inicio</string>
+    <string name="materias">Materias</string>
+    <string name="horarios">Horarios</string>
 </resources>

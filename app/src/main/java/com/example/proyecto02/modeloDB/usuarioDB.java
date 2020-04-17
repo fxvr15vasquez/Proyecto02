@@ -37,6 +37,24 @@ public class usuarioDB{
     db.close();
         return lista;
     }
+    public ArrayList<String> selecUsersbyID(int id,Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getReadableDatabase();
+        ArrayList<String> lista = new ArrayList<String>();
+        lista.clear();
+        Cursor cr;
+        String SQLC="select u.usu_nomb, p.per_nomb, p.per_corr_elec  from Usuario u JOIN Persona p ON p.per_id = u.per_id where u.usu_id ="+id;
+        cr= db.rawQuery(SQLC,null);
+        if(cr != null && cr.moveToFirst()){
+            do{
+                lista.add(cr.getString(0));
+                lista.add(cr.getString(1));
+                lista.add(cr.getString(2));
+            }while (cr.moveToNext());
+        }
+        db.close();
+        return lista;
+    }
 
     public int buscar(String pr,Context miContext){
         int x = 0;

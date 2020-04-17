@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.proyecto02.modeloDB.Conexion;
 import com.example.proyecto02.modeloDB.usuarioDB;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText lguser, lgpass;
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Conexion con;
     usuarioDB usuDB;
+
+    ArrayList<String> datos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this,"Campos vacios",Toast.LENGTH_SHORT).show();
                 }else if(id_usu !=0){
                     Intent inlogin = new Intent(MainActivity.this,InicioActivity.class);
-                    inlogin.putExtra("id_usu",id_usu);
+                    datos = usuDB.selecUsersbyID(id_usu,this);
+                    if (datos.size()!=0){
+                        inlogin.putExtra("user",datos.get(0));
+                        inlogin.putExtra("correo",datos.get(2));
+                    }
                     startActivity(inlogin);
                 }else{
                     Toast.makeText(this,"Usuario o contraseña incorrectas",Toast.LENGTH_SHORT).show();

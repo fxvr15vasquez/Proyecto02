@@ -13,10 +13,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.proyecto02.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,8 @@ public class GalleryFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+
         return root;
     }
 }
