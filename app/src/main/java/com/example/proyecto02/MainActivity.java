@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Conexion con;
     usuarioDB usuDB;
+    public static int id_usuario;
 
     ArrayList<String> datos;
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent inlogin = new Intent(MainActivity.this,InicioActivity.class);
                     datos = usuDB.selecUsersbyID(id_usu,this);
                     if (datos.size()!=0){
+                        id_usuario =id_usu;
                         inlogin.putExtra("user",datos.get(0));
                         inlogin.putExtra("correo",datos.get(2));
                     }

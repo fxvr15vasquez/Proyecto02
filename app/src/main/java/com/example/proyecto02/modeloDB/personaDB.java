@@ -13,10 +13,6 @@ public class personaDB {
     private static final String DATABASE="proyecto.db";
     ArrayList<Persona> listaPers;
 
-
-
-
-
     public ArrayList<Persona> selecPers(Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         ArrayList<Persona> lista = new ArrayList<Persona>();
