@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.proyecto02.modelo.Materia;
+import com.example.proyecto02.modeloDB.estudianteDB;
 import com.example.proyecto02.modeloDB.materiaDB;
 
 public class IngresoMateria extends AppCompatActivity implements View.OnClickListener{
@@ -22,9 +23,11 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
     private Spinner spnNiv;
     private EditText txtNomProf;
     private Button btnGuardar;
-    private materiaDB matDb;
     private SimpleCursorAdapter cursorAdapter;
+    int user_id;
     materiaDB materiadb;
+    estudianteDB estDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,13 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
         spnNiv = (Spinner) findViewById(R.id.spnNiv);
         materiadb = new materiaDB();
+        estDB = new estudianteDB();
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.nivel,android.R.layout.simple_spinner_item);
         //spnNiv.setAdapter(adapter);
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null){
+            user_id =extras.getInt("id");
+        }
 
 
         btnGuardar.setOnClickListener(this);
@@ -52,7 +60,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
             case R.id.btnGuardar:
                 if (!txtNomMat.getText().toString().isEmpty() && !txtDes.getText().toString().isEmpty() && !txtNomProf.getText().toString().isEmpty()) {
 
-                    Materia materia = new Materia(txtNomMat.getText().toString(), txtDes.getText().toString(), spnNiv.getSelectedItem().toString(), txtNomProf.getText().toString());
+                    Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), txtDes.getText().toString(), spnNiv.getSelectedItem().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
                     String sentencia = materiadb.insertaMateria(materia,this);
                     if (sentencia == null) {
                         Toast.makeText(getApplicationContext(), txtNomMat.getText().toString() + "des" + txtDes.getText().toString() + "" + spnNiv.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
