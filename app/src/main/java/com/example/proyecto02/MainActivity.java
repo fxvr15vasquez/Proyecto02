@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void Escanear(View.OnClickListener v){
+
         mScanner = new ZXingScannerView(this);
         setContentView(mScanner);
         mScanner.setResultHandler(this);
