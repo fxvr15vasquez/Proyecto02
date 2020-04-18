@@ -52,12 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnregis.setOnClickListener(this);
 
         btnIngCamara=(Button)findViewById(R.id.btnSca);
-        btnIngCamara.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Escanear(this);
-            }
-        });
+//        btnIngCamara.setOnClickListener(this);//(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        Escanear(this);
+        //    }
+        //});
     }
 
     @Override
@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnregis:
                 Intent inregis = new Intent(MainActivity.this,Registro.class);
                 startActivity(inregis);
+                break;
+            case R.id.btnSca:
+                Escanear(this);
                 break;
         }
     }

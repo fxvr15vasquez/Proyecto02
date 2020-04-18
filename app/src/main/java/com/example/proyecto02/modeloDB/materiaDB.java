@@ -26,12 +26,9 @@ public class materiaDB{
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         SQLiteDatabase db = conn.getWritableDatabase();
         String SQLi="";
-        SQLi+="insert into materia(mat_id,mat_nombre,mat_nivel,mat_descrip,mat_profesor)";
-        SQLi+=" values (1"+",'"+materia.getMat_nombre()+"'"+",'"+materia.getMat_nivel()+"'"+",'"+materia.getMat_descrip()+"'";
-        SQLi+=",'"+materia.getMat_profesor()+"')";
-        Log.d("materia",String.valueOf(materia.getMat_nombre()));
-        Log.d("nivel",String.valueOf(materia.getMat_nivel()));
-        Log.d("desc",String.valueOf(materia.getMat_descrip()));
+        SQLi+="insert into materia(mat_id,mat_nombre,mat_nivel,mat_descrip,mat_profesor,est_id)";
+        SQLi+=" values ("+materia.getMat_id()+",'"+materia.getMat_nombre()+"'"+",'"+materia.getMat_nivel()+"'"+",'"+materia.getMat_descrip()+"'";
+        SQLi+=",'"+materia.getMat_profesor()+"'"+materia.getEst_id()+" )";
         try {
             db.execSQL(SQLi);
         }catch (SQLException ex){
@@ -43,11 +40,29 @@ public class materiaDB{
 
     public Cursor listaMaterias(int id, Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
-        SQLiteDatabase db = conn.getReadableDatabase();
         Cursor cursor;
-        String SQLC="select ROWID as _id,* from Materia mt JOIN Estudiante et ON et.est_id = mat.est_id JOIN Usuario us ON"+
-                "us.user_id = et.user_id where user_id = "+id;
-        cursor= db.rawQuery(SQLC,null);
-        return cursor;
+        String SQLC="select ROWID as _id,* from Materia mt JOIN Estudiante et ON et.est_id = mt.est_id JOIN Usuario us ON "+
+                "us.usu_id = et.usu_id where us.usu_id = "+id;
+        try{
+            cursor= conn.getReadableDatabase().rawQuery(SQLC,null);
+            conn.close();
+            return cursor;
+        }catch (Exception e){
+            System.out.println("Error al cargar Materia: "+e.getMessage());
+            return null;
+        }
+    }
+    public int maxUser(Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getReadableDatabase();
+        int max=0;
+        Cursor cr;
+        String SQLC="select MAX(mat_id) from Materia";
+        cr= db.rawQuery(SQLC,null);
+        if(cr != null && cr.moveToFirst()){
+            max = cr.getInt(0);
+        }
+        db.close();
+        return max + 1;
     }
 }

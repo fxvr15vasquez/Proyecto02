@@ -1,5 +1,6 @@
 package com.example.proyecto02;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.TextureView;
@@ -35,10 +36,10 @@ public class InicioActivity extends AppCompatActivity {
     TextView textuser;
     TextView txtelec;
     usuarioDB usuDB;
+    static final int id_user = MainActivity.id_usuario;
     private ZXingScannerView mScanner;
     private View v;
     public Button btnIngCamara;
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -46,14 +47,7 @@ public class InicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -62,6 +56,19 @@ public class InicioActivity extends AppCompatActivity {
 
         textuser = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtusuarrio);
         txtelec = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtcorreo);
+        final int id_user = MainActivity.id_usuario;
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Accion del boton", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent inlmateria = new Intent(InicioActivity.this,IngresoMateria.class);
+                inlmateria.putExtra("id",id_user);
+                startActivity(inlmateria);
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
