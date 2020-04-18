@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Conexion con;
     usuarioDB usuDB;
     public static int id_usuario;
+    private View v;
+    public Button btnIngCamara;
 
     ArrayList<String> datos;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -47,6 +49,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btningre.setOnClickListener(this);
         btnregis.setOnClickListener(this);
+
+        btnIngCamara=(Button)findViewById(R.id.btnSca);
+        btnIngCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Escanear(this);
+            }
+        });
     }
 
     @Override
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void Escanear(View v){
+    public void Escanear(View.OnClickListener v){
         mScanner = new ZXingScannerView(this);
         setContentView(mScanner);
         mScanner.setResultHandler(this);

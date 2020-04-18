@@ -2,16 +2,20 @@ package com.example.proyecto02;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.proyecto02.modeloDB.usuarioDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.Result;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +27,8 @@ import androidx.appcompat.widget.Toolbar;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
 public class InicioActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -31,8 +37,12 @@ public class InicioActivity extends AppCompatActivity {
     TextView txtelec;
     usuarioDB usuDB;
     static final int id_user = MainActivity.id_usuario;
+    private ZXingScannerView mScanner;
+    private View v;
+    public Button btnIngCamara;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -93,4 +103,6 @@ public class InicioActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 }
