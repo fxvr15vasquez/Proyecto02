@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btningre.setOnClickListener(this);
         btnregis.setOnClickListener(this);
 
+        btnIngCamara=(Button)findViewById(R.id.btnSca);
         btnIngCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
