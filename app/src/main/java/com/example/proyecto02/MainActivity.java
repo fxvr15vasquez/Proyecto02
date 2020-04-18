@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         String user = lguser.getText().toString();
         String pass = lgpass.getText().toString();
+
 
         switch (v.getId()){
             case R.id.btningre:
@@ -95,10 +97,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void Escanear(View.OnClickListener v){
+
         mScanner = new ZXingScannerView(this);
         setContentView(mScanner);
         mScanner.setResultHandler(this);
         mScanner.startCamera();
+
     }
 
     @Override
