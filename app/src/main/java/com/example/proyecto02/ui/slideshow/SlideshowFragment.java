@@ -1,5 +1,8 @@
 package com.example.proyecto02.ui.slideshow;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,6 +21,7 @@ import com.example.proyecto02.R;
 public class SlideshowFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
+    final private int REQUEST_CODE_ASK_PERMISSION=111;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +34,16 @@ public class SlideshowFragment extends Fragment {
 
             }
         });
+        solicitarPermisoCamara();
         return root;
+    }
+
+    public void solicitarPermisoCamara(){
+        int permisoCamara = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);
+        if (permisoCamara!= PackageManager.PERMISSION_GRANTED){
+            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
+                requestPermissions(new String[] {Manifest.permission.CAMERA},REQUEST_CODE_ASK_PERMISSION);
+            }
+        }
     }
 }

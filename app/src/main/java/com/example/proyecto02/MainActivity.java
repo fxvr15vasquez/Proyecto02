@@ -1,9 +1,11 @@
 package com.example.proyecto02;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,13 +13,17 @@ import android.widget.Toast;
 
 import com.example.proyecto02.modeloDB.Conexion;
 import com.example.proyecto02.modeloDB.usuarioDB;
+import com.google.zxing.Result;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ZXingScannerView.ResultHandler{
 
     EditText lguser, lgpass;
     Button btningre, btnregis;
+    private ZXingScannerView mScanner;
 
     Conexion con;
     usuarioDB usuDB;
@@ -71,5 +77,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(inregis);
                 break;
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void Escanear(View v){
+        mScanner = new ZXingScannerView(this);
+        setContentView(mScanner);
+        mScanner.setResultHandler(this);
+        mScanner.startCamera();
+    }
+
+    @Override
+    public void handleResult(Result result) {
+        Log.v("HandleResult",result.getText());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Resultado del Escaner: Desea ir a la página Web");
+        //.setCancelable(false); //true para tocar fuera del dialog y desaparecer
+
+        builder.setMessage(result.getText());
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        mScanner.resumeCameraPreview(this);
     }
 }
