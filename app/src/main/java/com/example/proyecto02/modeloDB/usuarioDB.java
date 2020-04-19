@@ -22,7 +22,7 @@ public class usuarioDB{
         ArrayList<Usuario> lista = new ArrayList<Usuario>();
         lista.clear();
         Cursor cr;
-        String SQLC="select ROWID as _id,* from Usuario";
+        String SQLC="select * from Usuario";
         cr= db.rawQuery(SQLC,null);
         if(cr != null && cr.moveToFirst()){
             do{

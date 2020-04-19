@@ -74,8 +74,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                         Toast.makeText(this,"Error:  campos bacios",Toast.LENGTH_SHORT).show();
                     }else if(perDB.insertPers(pe,this) && usuDB.insertUser(us,this) && estDB.insertEst(est,this)){
                         Toast.makeText(this,"Usuario ingresado",Toast.LENGTH_SHORT).show();
-                        Intent inlogin2 = new Intent(Registro.this,MainActivity.class);
-                        startActivity(inlogin2);
                         finish();
                     }else{
                         Toast.makeText(this,"Usuario no ingresado",Toast.LENGTH_SHORT).show();
@@ -86,8 +84,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.btnRcanc:
-                Intent inlogin = new Intent(Registro.this,MainActivity.class);
-                startActivity(inlogin);
                 finish();
                 break;
         }

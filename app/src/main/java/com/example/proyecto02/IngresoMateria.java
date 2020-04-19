@@ -59,12 +59,10 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
                 if (!txtNomMat.getText().toString().isEmpty() && !txtDes.getText().toString().isEmpty() && !txtNomProf.getText().toString().isEmpty()) {
                     Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), null, txtDes.getText().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
                     if (materiadb.insertaMateria(materia,this)) {
-                        Toast.makeText(this, "Materia ingresada", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "MateriaActivity ingresada", Toast.LENGTH_LONG).show();
                         txtNomMat.setText("");
                         txtDes.setText("");
                         txtNomProf.setText("");
-                        Intent inmateria = new Intent(IngresoMateria.this,InicioActivity.class);
-                        startActivity(inmateria);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "ERROR al ingresar materia" , Toast.LENGTH_LONG).show();

@@ -8,9 +8,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_home">Tareas de Hoy</string>
+    <string name="menu_gallery">Materias</string>
+    <string name="menu_slideshow">Horario</string>
 
     <string name="home_second">Home Second</string>
     <string name="title_activity_inicio">InicioActivity</string>
