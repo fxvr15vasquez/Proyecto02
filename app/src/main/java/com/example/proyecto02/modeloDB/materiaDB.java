@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.proyecto02.modelo.Materia;
+import com.example.proyecto02.modelo.Tarea;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,15 +39,23 @@ public class materiaDB{
         return null;
     }
 
-    public Cursor listaMaterias(int id, Context miContext){
+    public ArrayList<Materia> listaMaterias(int id, Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         Cursor cursor;
-        String SQLC="select ROWID as _id,* from Materia mt JOIN Estudiante et ON et.est_id = mt.est_id JOIN Usuario us ON "+
+        ArrayList<Materia> lista = new ArrayList<Materia>();
+        lista.clear();
+        String SQLC="select * from Materia mt JOIN Estudiante et ON et.est_id = mt.est_id JOIN Usuario us ON "+
                 "us.usu_id = et.usu_id where us.usu_id = "+id;
         try{
             cursor= conn.getReadableDatabase().rawQuery(SQLC,null);
+            Materia mat = new Materia();
+            mat.setMat_id(cursor.getInt(0));
+            mat.setMat_nombre(cursor.getString(1));
+            mat.setMat_nivel(cursor.getString(2));
+            mat.setMat_descrip(cursor.getString(3));
+            lista.add(mat);
             conn.close();
-            return cursor;
+            return lista;
         }catch (Exception e){
             System.out.println("Error al cargar Materia: "+e.getMessage());
             return null;

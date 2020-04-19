@@ -20,15 +20,30 @@ public class tareaDB{
     private static final String DATABASE="proyecto.db";
 
 
-    public Cursor selecTars(int id, Context miContext){
+    public ArrayList<Tarea> selecTars(int id, Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         SQLiteDatabase db = conn.getWritableDatabase();
+        ArrayList<Tarea> lista = new ArrayList<Tarea>();
+        lista.clear();
         Cursor cr;
         String SQLC="select ROWID as _id,* from Tarea ta JOIN Materia ma ON ma.mat_id = ta.mat_id"+
                 "JOIN JOIN Estudiante et ON et.est_id = ma.est_id JOIN Usuario us ON" +
                 " us.user_id = et.user_id where user_id = "+id;
         cr= db.rawQuery(SQLC,null);
-        return cr;
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Tarea ta= new Tarea();
+                ta.setTar_id(cr.getInt(0));
+                ta.setTar_fech_entrega(cr.getString(1));
+                ta.setTar_nombre(cr.getString(2));
+                ta.setTar_descrip(cr.getString(3));
+                //ta.setTar_foto(cr.getBlob(4));
+                ta.setMat_id(cr.getInt(5));
+                lista.add(ta);
+            }while (cr.moveToNext());
+        }
+
+        return lista;
     }
 
     public boolean insertTars(Tarea tar,Context miContext){
