@@ -3,10 +3,8 @@ package com.example.proyecto02;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -39,7 +37,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
         txtDes = (EditText) findViewById(R.id.edtTxtDes);
         spnNiv = (Spinner) findViewById(R.id.spnNiv);
         txtNomProf = (EditText) findViewById(R.id.txtNomProf);
-        btnGuardar = (Button) findViewById(R.id.btnGuardar);
+        btnGuardar = (Button) findViewById(R.id.btnMGuardar);
         spnNiv = (Spinner) findViewById(R.id.spnNiv);
         materiadb = new materiaDB();
         estDB = new estudianteDB();
@@ -57,19 +55,19 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnGuardar:
+            case R.id.btnMGuardar:
                 if (!txtNomMat.getText().toString().isEmpty() && !txtDes.getText().toString().isEmpty() && !txtNomProf.getText().toString().isEmpty()) {
-
-                    Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), txtDes.getText().toString(), spnNiv.getSelectedItem().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
-                    String sentencia = materiadb.insertaMateria(materia,this);
-                    if (sentencia == null) {
-                        Toast.makeText(getApplicationContext(), txtNomMat.getText().toString() + "des" + txtDes.getText().toString() + "" + spnNiv.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-                        Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+                    Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), null, txtDes.getText().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
+                    if (materiadb.insertaMateria(materia,this)) {
+                        Toast.makeText(this, "Materia ingresada", Toast.LENGTH_LONG).show();
                         txtNomMat.setText("");
                         txtDes.setText("");
                         txtNomProf.setText("");
+                        Intent inmateria = new Intent(IngresoMateria.this,InicioActivity.class);
+                        startActivity(inmateria);
+                        finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "ERROR " + sentencia, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "ERROR al ingresar materia" , Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Debe llenar todos los datos", Toast.LENGTH_LONG).show();

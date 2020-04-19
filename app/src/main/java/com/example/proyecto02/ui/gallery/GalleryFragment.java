@@ -38,8 +38,9 @@ public class GalleryFragment extends Fragment {
         });
         conecta = new materiaDB();
         listaMaterias = (ListView) root.findViewById(R.id.listMaterias);
-        listaMaterias.setAdapter(new AdaptadorMateria(getContext(),conecta.listaMaterias(id_usu,getContext())));
-
+        if(conecta.listaMaterias(id_usu,getContext()) != null){
+            listaMaterias.setAdapter(new AdaptadorMateria(getContext(),conecta.listaMaterias(id_usu,getContext())));
+        }
         return root;
     }
 

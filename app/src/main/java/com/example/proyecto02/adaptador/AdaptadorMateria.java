@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.proyecto02.modelo.Materia;
 import com.example.proyecto02.R;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class AdaptadorMateria extends BaseAdapter {
@@ -27,7 +28,7 @@ public class AdaptadorMateria extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listaMateria.size();
+            return listaMateria.size();
     }
 
     @Override
@@ -49,11 +50,11 @@ public class AdaptadorMateria extends BaseAdapter {
         TextView matDesc = (TextView) vista.findViewById(R.id.txtLMdecip);
         TextView matNivl = (TextView) vista.findViewById(R.id.txtLMnivel);
 
-        matID.setText(listaMateria.get(i).getMat_id());
+        matID.setText(listaMateria.get(i).getMat_id()+"");
         matNomb.setText(listaMateria.get(i).getMat_nombre());
         matDesc.setText(listaMateria.get(i).getMat_descrip());
         matNivl.setText(listaMateria.get(i).getMat_nivel());
-
+        System.out.println("Mostrando materias "+i);
         return vista;
 
     }

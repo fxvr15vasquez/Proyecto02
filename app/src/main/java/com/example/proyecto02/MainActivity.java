@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         inlogin.putExtra("correo",datos.get(2));
                     }
                     startActivity(inlogin);
+                    finish();
                 }else{
                     Toast.makeText(this,"Usuario o contraseña incorrectas",Toast.LENGTH_SHORT).show();
                 }
@@ -98,13 +99,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*public final void Escanear(View.OnClickListener v){
+    public final void Escanear(View.OnClickListener v){
         mScanner = new ZXingScannerView(this);
         setContentView(mScanner);
         mScanner.setResultHandler(this);
         mScanner.startCamera();
 
-    }*/
+    }
 
     @Override
     public void handleResult(Result result) {

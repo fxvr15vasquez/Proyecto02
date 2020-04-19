@@ -21,6 +21,8 @@ public class Materia extends AppCompatActivity {
         tarDB = new tareaDB();
 
         listatareas = (ListView) findViewById(R.id.listTareas);
-        listatareas.setAdapter(new AdaptadorTarea(this,tarDB.selecTars(id_user,this)));
+        if(tarDB.selecTars(id_user,this) != null){
+            listatareas.setAdapter(new AdaptadorTarea(this,tarDB.selecTars(id_user,this)));
+        }
     }
 }

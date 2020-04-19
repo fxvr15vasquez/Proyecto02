@@ -1,5 +1,6 @@
 package com.example.proyecto02.modeloDB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -10,6 +11,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.proyecto02.modelo.Materia;
+import com.example.proyecto02.modelo.Persona;
 import com.example.proyecto02.modelo.Tarea;
 
 import java.io.File;
@@ -23,20 +25,24 @@ public class materiaDB{
     private static final String DATABASE="proyecto.db";
     ArrayList<Materia> listMat;
 
-    public String insertaMateria(Materia materia, Context miContext){
+    public boolean insertaMateria(Materia mat, Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         SQLiteDatabase db = conn.getWritableDatabase();
-        String SQLi="";
-        SQLi+="insert into materia(mat_id,mat_nombre,mat_nivel,mat_descrip,mat_profesor,est_id)";
-        SQLi+=" values ("+materia.getMat_id()+",'"+materia.getMat_nombre()+"'"+",'"+materia.getMat_nivel()+"'"+",'"+materia.getMat_descrip()+"'";
-        SQLi+=",'"+materia.getMat_profesor()+"'"+materia.getEst_id()+" )";
+        ContentValues cv = new ContentValues();
+        cv.put("mat_id",mat.getMat_id());
+        cv.put("mat_nombre",mat.getMat_nombre());
+        cv.put("mat_nivel",mat.getMat_nivel());
+        cv.put("mat_descrip",mat.getMat_descrip());
+        cv.put("mat_profesor",mat.getMat_profesor());
+        cv.put("est_id",mat.getEst_id());
         try {
-            db.execSQL(SQLi);
+            int ingrs = (int) db.insert("Materia","mat_id",cv);
+            db.close();
+            return (ingrs>0);
         }catch (SQLException ex){
-            System.out.println(ex.getMessage());
-            return ex.getMessage();
+            System.out.println("Error al ingreso de materia"+ex.getMessage());
+            return false;
         }
-        return null;
     }
 
     public ArrayList<Materia> listaMaterias(int id, Context miContext){
@@ -47,14 +53,19 @@ public class materiaDB{
         String SQLC="select * from Materia mt JOIN Estudiante et ON et.est_id = mt.est_id JOIN Usuario us ON "+
                 "us.usu_id = et.usu_id where us.usu_id = "+id;
         try{
-            cursor= conn.getReadableDatabase().rawQuery(SQLC,null);
-            Materia mat = new Materia();
-            mat.setMat_id(cursor.getInt(0));
-            mat.setMat_nombre(cursor.getString(1));
-            mat.setMat_nivel(cursor.getString(2));
-            mat.setMat_descrip(cursor.getString(3));
-            lista.add(mat);
+            cursor = conn.getReadableDatabase().rawQuery(SQLC,null);
+            if(cursor != null && cursor.moveToFirst()){
+                do{
+                    Materia mat = new Materia();
+                    mat.setMat_id(cursor.getInt(0));
+                    mat.setMat_nombre(cursor.getString(1));
+                    mat.setMat_nivel(cursor.getString(2));
+                    mat.setMat_descrip(cursor.getString(3));
+                    lista.add(mat);
+                }while (cursor.moveToNext());
+            }
             conn.close();
+            System.out.println("MOSTRANDO LISTA DE MATERIAS:");
             return lista;
         }catch (Exception e){
             System.out.println("Error al cargar Materia: "+e.getMessage());
