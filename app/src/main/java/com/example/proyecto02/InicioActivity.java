@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyecto02.modeloDB.usuarioDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -64,14 +65,15 @@ public class InicioActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Accion del boton", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent inlmateria = new Intent(InicioActivity.this,IngresoMateria.class);
-                inlmateria.putExtra("id",id_user);
+                Intent inlmateria = new Intent(InicioActivity.this, IngresoMateria.class);
+                inlmateria.putExtra("id", id_user);
                 startActivity(inlmateria);
             }
         });
 
+
         Bundle extras = getIntent().getExtras();
-        if (extras!=null){
+        if (extras != null) {
             textuser.setText(extras.getString("user"));
             txtelec.setText(extras.getString("correo"));
         }
@@ -88,8 +90,6 @@ public class InicioActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -103,6 +103,4 @@ public class InicioActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
 }

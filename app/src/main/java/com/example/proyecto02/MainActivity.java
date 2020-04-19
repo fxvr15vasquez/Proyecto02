@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //});
     }
 
+
+
     @Override
     public void onClick(View v) {
         String user = lguser.getText().toString();
@@ -88,22 +90,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent inregis = new Intent(MainActivity.this,Registro.class);
                 startActivity(inregis);
                 break;
-            case R.id.btnSca:
+            /*case R.id.btnSca:
                 Escanear(this);
-                break;
+                break;*/
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void Escanear(View.OnClickListener v){
-
+    /*public final void Escanear(View.OnClickListener v){
         mScanner = new ZXingScannerView(this);
         setContentView(mScanner);
         mScanner.setResultHandler(this);
         mScanner.startCamera();
 
-    }
+    }*/
 
     @Override
     public void handleResult(Result result) {
