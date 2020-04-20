@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.example.proyecto02.modelo.Materia;
 import com.example.proyecto02.modeloDB.estudianteDB;
 import com.example.proyecto02.modeloDB.materiaDB;
+
+import java.util.ArrayList;
 
 public class IngresoMateria extends AppCompatActivity implements View.OnClickListener{
     private EditText txtNomMat;
@@ -41,8 +44,8 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
         spnNiv = (Spinner) findViewById(R.id.spnNiv);
         materiadb = new materiaDB();
         estDB = new estudianteDB();
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.nivel,android.R.layout.simple_spinner_item);
-        //spnNiv.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.niveles,android.R.layout.simple_spinner_item);
+        spnNiv.setAdapter(adapter);
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             user_id =extras.getInt("id");
@@ -57,7 +60,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.btnMGuardar:
                 if (!txtNomMat.getText().toString().isEmpty() && !txtDes.getText().toString().isEmpty() && !txtNomProf.getText().toString().isEmpty()) {
-                    Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), null, txtDes.getText().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
+                    Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), spnNiv.getSelectedItem().toString(), txtDes.getText().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
                     if (materiadb.insertaMateria(materia,this)) {
                         Toast.makeText(this, "MateriaActivity ingresada", Toast.LENGTH_LONG).show();
                         txtNomMat.setText("");
