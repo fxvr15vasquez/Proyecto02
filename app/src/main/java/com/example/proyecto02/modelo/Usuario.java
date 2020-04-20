@@ -16,7 +16,7 @@ public class Usuario {
     }
 
     public boolean isNull(){
-        if (usu_nomb.equals("") && usu_pass.equals("")){
+        if (usu_id == 0 && usu_nomb.equals("") && usu_pass.equals("")){
             return false;
         }else{
             return true;

@@ -5,7 +5,7 @@ public class Tarea {
     private String tar_fech_entrega;
     private String tar_nombre;
     private String tar_descrip;
-    private Byte[] tar_foto;
+    private byte[] tar_foto;
     private int mat_id;
 
     public Tarea() {
@@ -47,15 +47,23 @@ public class Tarea {
         return mat_id;
     }
 
-    public Byte[] getTar_foto() {
+    public byte[] getTar_foto() {
         return tar_foto;
     }
 
-    public void setTar_foto(Byte[] tar_foto) {
+    public void setTar_foto(byte[] tar_foto) {
         this.tar_foto = tar_foto;
     }
 
     public void setMat_id(int mat_id) {
         this.mat_id = mat_id;
+    }
+
+    public boolean isNull(){
+        if (tar_id == 0 && tar_nombre.equals("") && tar_descrip.equals("")&& tar_fech_entrega.equals("") && mat_id == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

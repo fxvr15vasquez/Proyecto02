@@ -36,7 +36,7 @@ public class materiaDB{
         cv.put("mat_profesor",mat.getMat_profesor());
         cv.put("est_id",mat.getEst_id());
         try {
-            int ingrs = (int) db.insert("MateriaActivity","mat_id",cv);
+            int ingrs = (int) db.insert("Materia","mat_id",cv);
             db.close();
             return (ingrs>0);
         }catch (SQLException ex){

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.proyecto02.adaptador.AdaptadorTarea;
 import com.example.proyecto02.modelo.Tarea;
 import com.example.proyecto02.modeloDB.tareaDB;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -51,6 +53,17 @@ public class MateriaActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
         }
+        FloatingActionButton fab = findViewById(R.id.fabtTarea);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Accion del boton", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent inlmateria = new Intent(MateriaActivity.this, IngresoTarea.class);
+                inlmateria.putExtra("idM", id_mat);
+                startActivity(inlmateria);
+            }
+        });
     }
 
     @Override

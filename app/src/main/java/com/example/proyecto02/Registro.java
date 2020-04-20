@@ -70,7 +70,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                     est.setEst_id(estDB.maxEst(this));
                     est.setUsu_id(us.getUsu_id());
 
-                    if (!us.isNull()){
+                    if (!us.isNull() && pe.isNull()){
                         Toast.makeText(this,"Error:  campos bacios",Toast.LENGTH_SHORT).show();
                     }else if(perDB.insertPers(pe,this) && usuDB.insertUser(us,this) && estDB.insertEst(est,this)){
                         Toast.makeText(this,"Usuario ingresado",Toast.LENGTH_SHORT).show();

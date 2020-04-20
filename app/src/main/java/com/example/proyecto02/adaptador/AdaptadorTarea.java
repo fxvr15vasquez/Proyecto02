@@ -1,6 +1,8 @@
 package com.example.proyecto02.adaptador;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,12 +56,16 @@ public class AdaptadorTarea extends BaseAdapter {
         ImageView tarIMG = (ImageView) vista.findViewById(R.id.imvLTimg);
 
 
-            tarID.setText(listaTarea.get(i).getTar_id());
+            tarID.setText(listaTarea.get(i).getTar_id()+"");
             tarFech.setText(listaTarea.get(i).getTar_fech_entrega());
             tarDesc.setText(listaTarea.get(i).getTar_descrip());
-            //tarIMG.setImageResource(listaTarea.get(i).getTar_foto());
+            tarIMG.setImageBitmap(getImage(listaTarea.get(i).getTar_foto()));
 
         return vista;
 
+    }
+
+    public Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 }

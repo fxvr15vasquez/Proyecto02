@@ -65,4 +65,11 @@ public class Persona {
     public void setPer_celular(String per_celular) {
         this.per_celular = per_celular;
     }
+    public boolean isNull(){
+        if (per_id == 0 && per_apellido.equals("") && per_nombre.equals("")&& per_id == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
