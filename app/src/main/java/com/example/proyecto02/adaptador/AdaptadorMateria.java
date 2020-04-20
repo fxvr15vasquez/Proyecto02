@@ -45,16 +45,12 @@ public class AdaptadorMateria extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup parent) {
 
         final  View vista = inflater.inflate(R.layout.listadematerias, null);
-        TextView matID = (TextView) vista.findViewById(R.id.txtLMid);
         TextView matNomb = (TextView) vista.findViewById(R.id.txtLMnomb);
         TextView matDesc = (TextView) vista.findViewById(R.id.txtLMdecip);
-        TextView matNivl = (TextView) vista.findViewById(R.id.txtLMnivel);
-
-        matID.setText(listaMateria.get(i).getMat_id()+"");
+        TextView matProf = (TextView) vista.findViewById(R.id.txtLMProf);
         matNomb.setText(listaMateria.get(i).getMat_nombre());
         matDesc.setText(listaMateria.get(i).getMat_descrip());
-        matNivl.setText(listaMateria.get(i).getMat_nivel());
-        System.out.println("Mostrando materias "+i);
+        matProf.setText(listaMateria.get(i).getMat_profesor());
         return vista;
 
     }
