@@ -116,6 +116,36 @@ public class tareaDB{
             return false;
         }
     }
+    public boolean editTars(Tarea tar,Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("tar_fech_entrega",tar.getTar_fech_entrega());
+        cv.put("tar_nomb",tar.getTar_nombre());
+        cv.put("tar_descrip",tar.getTar_descrip());
+        cv.put("tar_foto",tar.getTar_foto());
+        cv.put("mat_id",tar.getMat_id());
+        try {
+            int ingrs = (int) db.update("Tarea",cv,"tar_id ="+tar.getTar_id(),null);
+            db.close();
+            return (ingrs>0);
+        }catch (SQLException ex){
+            System.out.println("Error al editar de tarea"+ex.getMessage());
+            return false;
+        }
+    }
+    public boolean elimTars(int tar,Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        try {
+            int ingrs = (int) db.delete("Tarea","tar_id ="+tar,null);
+            db.close();
+            return (ingrs>0);
+        }catch (SQLException ex){
+            System.out.println("Error al eliminar la tarea"+ex.getMessage());
+            return false;
+        }
+    }
 
     public int maxTars(Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);

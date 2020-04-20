@@ -44,6 +44,38 @@ public class materiaDB{
             return false;
         }
     }
+    public boolean editMateria(Materia mat, Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("mat_id",mat.getMat_id());
+        cv.put("mat_nombre",mat.getMat_nombre());
+        cv.put("mat_nivel",mat.getMat_nivel());
+        cv.put("mat_descrip",mat.getMat_descrip());
+        cv.put("mat_profesor",mat.getMat_profesor());
+        cv.put("est_id",mat.getEst_id());
+        try {
+            int ingrs = (int) db.update("Materia",cv,"mat_id="+mat.getMat_id(),null);
+            db.close();
+            return (ingrs>0);
+        }catch (SQLException ex){
+            System.out.println("Error al editar de materia"+ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean elimMatr(int tar,Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        try {
+            int ingrs = (int) db.delete("Materia","mat_id ="+tar,null);
+            db.close();
+            return (ingrs>0);
+        }catch (SQLException ex){
+            System.out.println("Error al elminar tarea"+ex.getMessage());
+            return false;
+        }
+    }
 
     public ArrayList<Materia> listaMaterias(int id, Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
