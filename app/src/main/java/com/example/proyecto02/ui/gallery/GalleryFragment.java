@@ -45,14 +45,13 @@ public class GalleryFragment extends Fragment {
         if(conecta.listaMaterias(id_usu,getContext()) != null){
             listMat = conecta.listaMaterias(id_usu,getContext());
             listaMaterias.setAdapter(new AdaptadorMateria(getContext(),listMat));
-            listaMaterias.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            listaMaterias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent inttarea  = new Intent(getContext(), MateriaActivity.class);
                     inttarea.putExtra("mat_id",listMat.get(position).getMat_id());
                     inttarea.putExtra("mat_nomb",listMat.get(position).getMat_nombre());
                     startActivity(inttarea);
-                    return false;
                 }
             });
         }

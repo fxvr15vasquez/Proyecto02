@@ -72,6 +72,31 @@ public class tareaDB{
         return lista;
     }
 
+    public ArrayList<Tarea> selecTarFech(int id, String fech,Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        ArrayList<Tarea> lista = new ArrayList<Tarea>();
+        lista.clear();
+        Cursor cr;
+        String SQLC="select * from Tarea ta JOIN Materia ma ON ma.mat_id = ta.mat_id "+
+                "JOIN Estudiante et ON et.est_id = ma.est_id JOIN Usuario us ON " +
+                " us.usu_id = et.usu_id where ta.tar_fech_entrega = '"+fech+"' AND us.usu_id = "+id;
+        cr= conn.getReadableDatabase().rawQuery(SQLC,null);
+        if(cr != null && cr.moveToFirst()){
+            do{
+                Tarea ta= new Tarea();
+                ta.setTar_id(cr.getInt(0));
+                ta.setTar_fech_entrega(cr.getString(1));
+                ta.setTar_nombre(cr.getString(2));
+                ta.setTar_descrip(cr.getString(3));
+                ta.setTar_foto(cr.getBlob(4));
+                ta.setMat_id(cr.getInt(5));
+                lista.add(ta);
+            }while (cr.moveToNext());
+        }
+
+        return lista;
+    }
+
     public boolean insertTars(Tarea tar,Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         SQLiteDatabase db = conn.getWritableDatabase();

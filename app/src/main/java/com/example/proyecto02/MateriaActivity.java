@@ -45,11 +45,10 @@ public class MateriaActivity extends AppCompatActivity implements View.OnClickLi
         if(tarDB.selecTars(id_user,this) != null){
             listTar= tarDB.selecTarMat(id_mat,this);
             listatareas.setAdapter(new AdaptadorTarea(this,listTar));
-            listatareas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            listatareas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    return false;
                 }
             });
         }
@@ -73,8 +72,6 @@ public class MateriaActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.btnregis:
-                Intent ingretar  = new Intent(MateriaActivity.this, IngresoTarea.class);
-                startActivity(ingretar);
                 break;
             case R.id.btnSca:
 
