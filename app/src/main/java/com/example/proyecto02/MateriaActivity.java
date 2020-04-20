@@ -18,7 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class MateriaActivity extends AppCompatActivity implements View.OnClickListener{
+public class MateriaActivity extends AppCompatActivity {
 
     ListView listatareas;
     TextView mater;
@@ -48,7 +48,9 @@ public class MateriaActivity extends AppCompatActivity implements View.OnClickLi
             listatareas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    Intent editmater = new Intent(MateriaActivity.this, EditarMateria.class);
+                    editmater.putExtra("matID", id_mat);
+                    startActivity(editmater);
                 }
             });
         }
@@ -65,17 +67,4 @@ public class MateriaActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btningre:
-
-                break;
-            case R.id.btnregis:
-                break;
-            case R.id.btnSca:
-
-                break;
-        }
-    }
 }

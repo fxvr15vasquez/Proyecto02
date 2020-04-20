@@ -48,12 +48,10 @@ public class materiaDB{
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         SQLiteDatabase db = conn.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("mat_id",mat.getMat_id());
         cv.put("mat_nombre",mat.getMat_nombre());
         cv.put("mat_nivel",mat.getMat_nivel());
         cv.put("mat_descrip",mat.getMat_descrip());
         cv.put("mat_profesor",mat.getMat_profesor());
-        cv.put("est_id",mat.getEst_id());
         try {
             int ingrs = (int) db.update("Materia",cv,"mat_id="+mat.getMat_id(),null);
             db.close();
@@ -97,10 +95,29 @@ public class materiaDB{
                 }while (cursor.moveToNext());
             }
             conn.close();
-            System.out.println("MOSTRANDO LISTA DE MATERIAS:");
             return lista;
         }catch (Exception e){
-            System.out.println("Error al cargar MateriaActivity: "+e.getMessage());
+            System.out.println("Error al cargar Materia: "+e.getMessage());
+            return null;
+        }
+    }
+    public Materia materiasBYID(int id, Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        Cursor cursor;
+        Materia mat = new Materia();
+        String SQLC="select * from Materia WHERE mat_id = "+id;
+        try{
+            cursor = conn.getReadableDatabase().rawQuery(SQLC,null);
+            if(cursor != null && cursor.moveToFirst()){
+                    mat.setMat_id(cursor.getInt(0));
+                    mat.setMat_nombre(cursor.getString(1));
+                    mat.setMat_nivel(cursor.getString(2));
+                    mat.setMat_descrip(cursor.getString(3));
+            }
+            conn.close();
+            return mat;
+        }catch (Exception e){
+            System.out.println("Error al cargar Materia: "+e.getMessage());
             return null;
         }
     }
