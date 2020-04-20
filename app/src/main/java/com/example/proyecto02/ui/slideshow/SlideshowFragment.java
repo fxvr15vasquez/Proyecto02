@@ -39,11 +39,6 @@ public class SlideshowFragment extends Fragment {
         return root;
     }
 
-    public void iniciaCamara(View view){
-        MainActivity ini = new MainActivity();
-        ini.Escanear((View.OnClickListener) this);
-    }
-
     public void solicitarPermisoCamara(){
         int permisoCamara = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);
         if (permisoCamara!= PackageManager.PERMISSION_GRANTED){

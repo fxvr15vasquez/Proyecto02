@@ -52,12 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnregis.setOnClickListener(this);
 
         btnIngCamara=(Button)findViewById(R.id.btnSca);
-//        btnIngCamara.setOnClickListener(this);//(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        Escanear(this);
-        //    }
-        //});
+
     }
 
 
@@ -91,21 +86,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent inregis = new Intent(MainActivity.this,Registro.class);
                 startActivity(inregis);
                 break;
-            /*case R.id.btnSca:
-                Escanear(this);
-                break;*/
+            case R.id.btnSca:
+                mScanner = new ZXingScannerView(this);
+                setContentView(mScanner);
+                mScanner.setResultHandler(this);
+                mScanner.startCamera();
+                break;
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public final void Escanear(View.OnClickListener v){
+    /*public final void Escanear(View.OnClickListener v){
         mScanner = new ZXingScannerView(this);
         setContentView(mScanner);
         mScanner.setResultHandler(this);
         mScanner.startCamera();
 
-    }
+    }*/
 
     @Override
     public void handleResult(Result result) {
