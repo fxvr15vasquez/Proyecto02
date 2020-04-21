@@ -71,6 +71,22 @@ public class tareaDB{
 
         return lista;
     }
+    public Tarea selecTarMatBYID(int id, Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        Tarea ta = new Tarea();
+        Cursor cr;
+        String SQLC="select * from Tarea  where tar_id = "+id;
+        cr= conn.getReadableDatabase().rawQuery(SQLC,null);
+        if(cr != null && cr.moveToFirst()){
+                ta.setTar_id(cr.getInt(0));
+                ta.setTar_fech_entrega(cr.getString(1));
+                ta.setTar_nombre(cr.getString(2));
+                ta.setTar_descrip(cr.getString(3));
+                ta.setTar_foto(cr.getBlob(4));
+                ta.setMat_id(cr.getInt(5));
+        }
+        return ta;
+    }
 
     public ArrayList<Tarea> selecTarFech(int id, String fech,Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
@@ -124,7 +140,6 @@ public class tareaDB{
         cv.put("tar_nomb",tar.getTar_nombre());
         cv.put("tar_descrip",tar.getTar_descrip());
         cv.put("tar_foto",tar.getTar_foto());
-        cv.put("mat_id",tar.getMat_id());
         try {
             int ingrs = (int) db.update("Tarea",cv,"tar_id ="+tar.getTar_id(),null);
             db.close();
@@ -139,6 +154,18 @@ public class tareaDB{
         SQLiteDatabase db = conn.getWritableDatabase();
         try {
             int ingrs = (int) db.delete("Tarea","tar_id ="+tar,null);
+            db.close();
+            return (ingrs>0);
+        }catch (SQLException ex){
+            System.out.println("Error al eliminar la tarea"+ex.getMessage());
+            return false;
+        }
+    }
+    public boolean elimTarsBYMAT(int tar,Context miContext){
+        Conexion conn = new Conexion(miContext,DATABASE,null,1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+        try {
+            int ingrs = (int) db.delete("Tarea","mat_id ="+tar,null);
             db.close();
             return (ingrs>0);
         }catch (SQLException ex){

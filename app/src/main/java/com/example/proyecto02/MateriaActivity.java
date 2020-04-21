@@ -48,9 +48,9 @@ public class MateriaActivity extends AppCompatActivity {
             listatareas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent editmater = new Intent(MateriaActivity.this, EditarMateria.class);
-                    editmater.putExtra("matID", id_mat);
-                    startActivity(editmater);
+                    Intent tareaedit = new Intent(MateriaActivity.this, EditarTarea.class);
+                    tareaedit.putExtra("idTar", listTar.get(position).getTar_id());
+                    startActivity(tareaedit);
                 }
             });
         }

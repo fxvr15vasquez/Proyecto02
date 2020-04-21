@@ -91,6 +91,7 @@ public class materiaDB{
                     mat.setMat_nombre(cursor.getString(1));
                     mat.setMat_nivel(cursor.getString(2));
                     mat.setMat_descrip(cursor.getString(3));
+                    mat.setMat_profesor(cursor.getString(4));
                     lista.add(mat);
                 }while (cursor.moveToNext());
             }
@@ -112,7 +113,8 @@ public class materiaDB{
                     mat.setMat_id(cursor.getInt(0));
                     mat.setMat_nombre(cursor.getString(1));
                     mat.setMat_nivel(cursor.getString(2));
-                    mat.setMat_descrip(cursor.getString(3));
+
+                mat.setMat_profesor(cursor.getString(4));
             }
             conn.close();
             return mat;

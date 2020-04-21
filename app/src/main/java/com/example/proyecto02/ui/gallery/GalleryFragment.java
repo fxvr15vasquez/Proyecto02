@@ -13,12 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.example.proyecto02.EditarMateria;
+import com.example.proyecto02.IngresoMateria;
 import com.example.proyecto02.MainActivity;
 import com.example.proyecto02.MateriaActivity;
 import com.example.proyecto02.R;
 import com.example.proyecto02.adaptador.AdaptadorMateria;
 import com.example.proyecto02.modelo.Materia;
 import com.example.proyecto02.modeloDB.materiaDB;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -54,7 +59,28 @@ public class GalleryFragment extends Fragment {
                     startActivity(inttarea);
                 }
             });
+            listaMaterias.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent editmater = new Intent(getContext(), EditarMateria.class);
+                    editmater.putExtra("matID", listMat.get(position).getMat_id());
+                    startActivity(editmater);
+                    return false;
+                }
+            });
         }
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Accion del boton", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent inlmateria = new Intent(getContext(), IngresoMateria.class);
+                inlmateria.putExtra("id", id_usu);
+                startActivity(inlmateria);
+            }
+        });
+
         return root;
     }
 

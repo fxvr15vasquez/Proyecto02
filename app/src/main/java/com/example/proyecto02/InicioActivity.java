@@ -59,18 +59,6 @@ public class InicioActivity extends AppCompatActivity {
         txtelec = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtcorreo);
         final int id_user = MainActivity.id_usuario;
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Accion del boton", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent inlmateria = new Intent(InicioActivity.this, IngresoMateria.class);
-                inlmateria.putExtra("id", id_user);
-                startActivity(inlmateria);
-            }
-        });
-
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

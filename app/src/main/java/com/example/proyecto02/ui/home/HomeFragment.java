@@ -1,5 +1,6 @@
 package com.example.proyecto02.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.proyecto02.EditarTarea;
+import com.example.proyecto02.IngresoMateria;
+import com.example.proyecto02.IngresoTarea;
+import com.example.proyecto02.InicioActivity;
 import com.example.proyecto02.MainActivity;
+import com.example.proyecto02.MateriaActivity;
 import com.example.proyecto02.R;
 import com.example.proyecto02.adaptador.AdaptadorTarea;
 import com.example.proyecto02.modelo.Tarea;
 import com.example.proyecto02.modeloDB.tareaDB;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +64,9 @@ public class HomeFragment extends Fragment {
             listatareas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    Intent tareaedit = new Intent(getContext(), EditarTarea.class);
+                    tareaedit.putExtra("idTar", listTar.get(position).getTar_id());
+                    startActivity(tareaedit);
                 }
             });
         }
