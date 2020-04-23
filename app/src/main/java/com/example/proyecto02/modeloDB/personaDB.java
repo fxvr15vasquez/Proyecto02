@@ -18,7 +18,7 @@ public class personaDB {
         ArrayList<Persona> lista = new ArrayList<Persona>();
         lista.clear();
         Cursor cr;
-        String SQLC="select ROWID as _id,* from Persona";
+        String SQLC="select * from Persona";
         cr = conn.getReadableDatabase().rawQuery(SQLC,null);
         if(cr != null && cr.moveToFirst()){
             do{

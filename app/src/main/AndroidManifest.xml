@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".EditarMateria"></activity>
+        <activity android:name=".EditarNotas"></activity>
+        <activity android:name=".Ingreso_Notas" />
+        <activity android:name=".EditarMateria" />
         <activity android:name=".EditarTarea" />
         <activity android:name=".MateriaActivity" />
         <activity

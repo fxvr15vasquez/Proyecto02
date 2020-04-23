@@ -2,7 +2,7 @@ package com.example.proyecto02.modelo;
 
 public class Notas {
     private int not_id;
-    private Byte not_foto;
+    private byte[] not_foto;
     private String not_descrip;
     private String not_fech;
     private int mat_id;
@@ -15,11 +15,11 @@ public class Notas {
         this.not_id = not_id;
     }
 
-    public Byte getNot_foto() {
+    public byte[] getNot_foto() {
         return not_foto;
     }
 
-    public void setNot_foto(Byte not_foto) {
+    public void setNot_foto(byte[] not_foto) {
         this.not_foto = not_foto;
     }
 
