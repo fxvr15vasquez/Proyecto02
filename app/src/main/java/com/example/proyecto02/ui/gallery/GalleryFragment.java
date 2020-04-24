@@ -84,4 +84,13 @@ public class GalleryFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        if(conecta.listaMaterias(id_usu,getContext()) != null){
+            listMat = conecta.listaMaterias(id_usu,getContext());
+            listaMaterias.setAdapter(new AdaptadorMateria(getContext(),listMat));
+        }
+        super.onResume();
+    }
+
 }

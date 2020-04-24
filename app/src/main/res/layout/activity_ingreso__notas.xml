@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="dd/MM/yyyy"
+        android:hint="Fecha dd/MM/yyyy"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +20,11 @@
 
     <EditText
         android:id="@+id/etxtINdescrip"
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_width="390dp"
+        android:layout_height="127dp"
         android:layout_marginTop="50dp"
         android:gravity="top"
+        android:hint="Descripcción"
         android:inputType="text|textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

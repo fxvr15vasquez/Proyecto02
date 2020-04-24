@@ -70,7 +70,7 @@ public class materiaDB{
             db.close();
             return (ingrs>0);
         }catch (SQLException ex){
-            System.out.println("Error al elminar tarea"+ex.getMessage());
+            System.out.println("Error al elminar Materia"+ex.getMessage());
             return false;
         }
     }
@@ -110,10 +110,9 @@ public class materiaDB{
         try{
             cursor = conn.getReadableDatabase().rawQuery(SQLC,null);
             if(cursor != null && cursor.moveToFirst()){
-                    mat.setMat_id(cursor.getInt(0));
                     mat.setMat_nombre(cursor.getString(1));
                     mat.setMat_nivel(cursor.getString(2));
-
+                    mat.setMat_descrip(cursor.getString(3));
                 mat.setMat_profesor(cursor.getString(4));
             }
             conn.close();

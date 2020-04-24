@@ -71,7 +71,6 @@ public class personaDB {
         cr= conn.getReadableDatabase().rawQuery(SQLC,null);
         if(cr != null && cr.moveToFirst()){
             max = cr.getInt(0);
-            System.out.println("codigo maximo de persona: "+max);
         }
         return max + 1;
     }

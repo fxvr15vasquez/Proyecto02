@@ -29,12 +29,13 @@ public class notasDB  {
             db.close();
             return (ingrs>0);
     }
-    public ArrayList<Notas> selecNotas(Context miContext){
+    public ArrayList<Notas> selecNotasBymatID(int cod,Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
         ArrayList<Notas> lista = new ArrayList<Notas>();
         lista.clear();
         Cursor cr;
-        String SQLC="select * from Notas";
+        String SQLC="select * from Notas nt JOIN Materia ma ON ma.mat_id = nt.mat_id "+
+                " where nt.mat_id = "+cod;
         cr = conn.getReadableDatabase().rawQuery(SQLC,null);
         if(cr != null && cr.moveToFirst()){
             do{
@@ -50,27 +51,22 @@ public class notasDB  {
         return lista;
     }
 
-    public ArrayList<Notas> selecTarNotbyMat(int id, Context miContext){
+    public Notas selecTarNotbyID(int id, Context miContext){
         Conexion conn = new Conexion(miContext,DATABASE,null,1);
-        ArrayList<Notas> lista = new ArrayList<Notas>();
-        lista.clear();
+        Notas nt = new Notas();
         Cursor cr;
-        String SQLC="select * from Notas nt JOIN Materia ma ON ma.mat_id = nt.mat_id "+
-                " where nt.mat_id = "+id;
+        String SQLC="select * from Notas WHERE not_id ="+id;
         cr= conn.getReadableDatabase().rawQuery(SQLC,null);
         if(cr != null && cr.moveToFirst()){
-            do{
-                Notas nt = new Notas();
+
                 nt.setNot_id(cr.getInt(0));
                 nt.setNot_foto(cr.getBlob(1));
                 nt.setNot_descrip(cr.getString(2));
                 nt.setNot_fech(cr.getString(3));
                 nt.setMat_id(cr.getInt(4));
-                lista.add(nt);
-            }while (cr.moveToNext());
         }
 
-        return lista;
+        return nt;
     }
 
     public boolean editNot(Notas not, Context miContext){

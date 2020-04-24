@@ -12,9 +12,6 @@
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:layout_marginTop="48dp"
-        android:background="@android:color/darker_gray"
-        android:gravity="top"
-        android:inputType="text|textMultiLine"
         android:hint="Nombre de la Materia"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +60,7 @@
         android:layout_width="275dp"
         android:layout_height="150dp"
         android:layout_marginTop="60dp"
+        android:background="@android:color/darker_gray"
         android:gravity="top"
         android:inputType="text|textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,14 +81,22 @@
 
     <Button
         android:id="@+id/btnMGuardar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginLeft="71dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="60dp"
         android:text="Guardar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNomProf" />
+
+    <Button
+        android:id="@+id/btnRMcanc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="CANCELAR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMGuardar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

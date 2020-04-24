@@ -23,7 +23,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
     private EditText txtDes;
     private Spinner spnNiv;
     private EditText txtNomProf;
-    private Button btnGuardar;
+    private Button btnGuardar, btncancl;
     private SimpleCursorAdapter cursorAdapter;
     int user_id;
     materiaDB materiadb;
@@ -41,6 +41,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
         spnNiv = (Spinner) findViewById(R.id.spnNiv);
         txtNomProf = (EditText) findViewById(R.id.txtNomProf);
         btnGuardar = (Button) findViewById(R.id.btnMGuardar);
+        btncancl = (Button) findViewById(R.id.btnRMcanc);
         spnNiv = (Spinner) findViewById(R.id.spnNiv);
         materiadb = new materiaDB();
         estDB = new estudianteDB();
@@ -53,6 +54,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
 
 
         btnGuardar.setOnClickListener(this);
+        btncancl.setOnClickListener(this);
     }
 
     @Override
@@ -62,7 +64,7 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
                 if (!txtNomMat.getText().toString().isEmpty() && !txtDes.getText().toString().isEmpty() && !txtNomProf.getText().toString().isEmpty()) {
                     Materia materia = new Materia(materiadb.maxUser(this),txtNomMat.getText().toString(), spnNiv.getSelectedItem().toString(), txtDes.getText().toString(), txtNomProf.getText().toString(),estDB.selecEst(user_id,this));
                     if (materiadb.insertaMateria(materia,this)) {
-                        Toast.makeText(this, "MateriaActivity ingresada", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Materia ingresada", Toast.LENGTH_LONG).show();
                         txtNomMat.setText("");
                         txtDes.setText("");
                         txtNomProf.setText("");
@@ -72,13 +74,11 @@ public class IngresoMateria extends AppCompatActivity implements View.OnClickLis
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Debe llenar todos los datos", Toast.LENGTH_LONG).show();
-                    //finish();
                 }
 
                 break;
-            case R.id.btnregis:
-                //Intent inregis = new Intent(MainActivity.this,Registro.class);
-                //startActivity(inregis);
+            case R.id.btnRMcanc:
+                finish();
                 break;
         }
     }

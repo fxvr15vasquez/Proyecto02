@@ -22,6 +22,7 @@ import com.example.proyecto02.InicioActivity;
 import com.example.proyecto02.MainActivity;
 import com.example.proyecto02.MateriaActivity;
 import com.example.proyecto02.R;
+import com.example.proyecto02.adaptador.AdaptadorMateria;
 import com.example.proyecto02.adaptador.AdaptadorTarea;
 import com.example.proyecto02.modelo.Tarea;
 import com.example.proyecto02.modeloDB.tareaDB;
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
     tareaDB tarDB;
     final int id_usu = MainActivity.id_usuario;
     ArrayList<Tarea> listTar;
+    String fecha="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class HomeFragment extends Fragment {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date date = new Date();
-        String fecha = dateFormat.format(date);
+        fecha = dateFormat.format(date);
 
         listatareas = (ListView) root.findViewById(R.id.lstVtarh);
         if(tarDB.selecTars(id_usu,getContext()) != null){
@@ -72,5 +74,13 @@ public class HomeFragment extends Fragment {
         }
 
         return root;
+    }
+    @Override
+    public void onResume() {
+        if(tarDB.selecTars(id_usu,getContext()) != null){
+            listTar= tarDB.selecTarFech(id_usu,fecha,getContext());
+            listatareas.setAdapter(new AdaptadorTarea(getContext(),listTar));
+        }
+        super.onResume();
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.proyecto02.modelo.Materia;
 import com.example.proyecto02.modeloDB.materiaDB;
+import com.example.proyecto02.modeloDB.notasDB;
 import com.example.proyecto02.modeloDB.tareaDB;
 
 import java.sql.DataTruncation;
@@ -26,6 +27,7 @@ public class EditarMateria extends AppCompatActivity implements View.OnClickList
     Button editar, elimn;
     materiaDB mtDB;
     tareaDB taDB;
+    notasDB notDB;
 
     int id;
     @Override
@@ -35,6 +37,7 @@ public class EditarMateria extends AppCompatActivity implements View.OnClickList
 
         mtDB = new materiaDB();
         taDB = new tareaDB();
+        notDB = new notasDB();
         nombre = (EditText) findViewById(R.id.etxtEMnomb);
         descrip = (EditText) findViewById(R.id.etxtEMdescrip);
         nivel = (EditText) findViewById(R.id.etxtEMnivel);
@@ -77,16 +80,11 @@ public class EditarMateria extends AppCompatActivity implements View.OnClickList
             case R.id.btnEMeliminar:
 
                                 if(mtDB.elimMatr(id,this)){
-                                    if (taDB.elimTarsBYMAT(id,this)){
                                         Toast.makeText(getApplicationContext(), "Materia eliminada" , Toast.LENGTH_LONG).show();
                                         finish();
-                                    }
                                 }else{
                                     Toast.makeText(getApplicationContext(),"ERROR al eliminar" ,Toast.LENGTH_LONG).show();
                                 }
-
-                break;
-            case R.id.btnSca:
 
                 break;
         }
